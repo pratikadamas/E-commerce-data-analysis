@@ -9,23 +9,6 @@
 
 ---
 
-## 📌 Executive Summary & Key Findings
-
-| Metric / Dimension | Non-Discounted Orders | Discounted Orders | Delta / Impact | Statistical / Commercial Significance |
-| :--- | :--- | :--- | :--- | :--- |
-| **Delivered Orders ($n$)** | 156 ($3.6\%$) | 4,230 ($96.4\%$) | $4,386$ Total | Analytical population (delivered orders only) |
-| **Mean AOV** | **$\$18,799.19$** | **$\$35,550.65$** | **$+89.11\%$** ($+\$16,751.46$) | **Welch's $t = 13.88$, $p = 1.87 \times 10^{-30}$** (Reject $H_0$) |
-| **Median AOV** | $\$14,292.00$ | $\$32,649.20$ | $+128.4\%$ | **Mann-Whitney $U = 480,496.5, p = 3.22 \times 10^{-22}$** |
-| **95% Confidence Interval** | — | — | **$[\$14,369.70, \$19,133.22]$** | True difference is large and strictly positive |
-| **Standardized Effect Size** | — | — | **Cohen's $d = 0.744$**, **Hedges' $g = 0.744$** | **Medium-to-Large commercial magnitude** |
-| **Mean Items / Basket** | 1.20 items | 2.56 items | **$+113.3\%$** | Primary mechanism driving order-level AOV |
-| **Mean Units / Basket** | 3.12 units | 6.36 units | **$+103.8\%$** | Cross-selling and bundle expansion |
-| **Mean Realized Margin** | **$38.65\%$** | **$32.24\%$** | **$-6.41$ percentage points** | Realized gross margin erosion |
-| **Loss-Making Orders** | 0 orders ($0.0\%$) | 15 orders ($0.35\%$) | High-discount risk | Negative profit occurs only at $\ge 20\%$ discount |
-| **Best ML Model ($R^2$)** | Baseline: $0.00$ | **Gradient Boosting: $0.9184$** | **$\text{MAE} = \$1,992.70$** | Reduced prediction error by $73.6\%$ vs baseline |
-
----
-
 ## 🎯 1. Business Problem & Hypotheses
 
 ### 1.1 Business Context
