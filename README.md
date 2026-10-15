@@ -1,4 +1,4 @@
-# 📊 E-Commerce Discount Impact Analysis Using Hypothesis Testing & Machine Learning
+# E-Commerce Discount Impact Analysis Using Hypothesis Testing & Machine Learning
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -44,45 +44,53 @@ H_1: \mu_{\text{discount}} \neq \mu_{\text{no\_discount}} \quad \text{(Alternati
 
 ---
 
-## 🗄️ 2. Dataset Architecture & Data Dictionary
+## 🗄️ 2. Relational Database Schema & Data Architecture
 
-The project analyzes five relational entities ($5,000$ total orders across $2.5$ years):
+The data architecture is structured as a normalized relational database containing **5 core entities** that capture the complete lifecycle of customer orders, product catalog metadata, discounts, and return reasons.
 
-```
-┌──────────────┐          ┌──────────────┐          ┌───────────────────┐
-│  Customers   │ 1      * │    Orders    │ 1      * │   OrderDetails    │
-│ (1,000 rows) ├──────────┤ (5,000 rows) ├──────────┤   (12,558 rows)   │
-└──────────────┘          └──────┬───────┘          └─────────┬─────────┘
-                                 │ 1                          │ *
-                                 │                            │
-                                 │ *                          │ 1
-                          ┌──────┴───────┐          ┌─────────┴─────────┐
-                          │   Returns    │          │     Products      │
-                          │  (257 rows)  │          │     (82 rows)     │
-                          └──────────────┘          └───────────────────┘
-```
+### 2.1 E-Commerce Database Schema Diagram
 
-### Data Dictionary
-| Table | Column | Type | Description |
-| :--- | :--- | :--- | :--- |
-| **Orders** | `OrderID` | String (PK) | Unique order identifier (`O00001` - `O05000`) |
-| | `OrderDate` | Date | Order transaction date (`2024-01-01` to `2026-07-31`) |
-| | `CustomerID` | String (FK) | Reference to customer (`C0001` - `C1000`) |
-| | `PaymentMethod`| String | Payment channel (`UPI`, `Credit Card`, `Debit Card`, `Cash on Delivery`, `Net Banking`) |
-| | `OrderStatus` | String | Order fulfillment state (`Delivered`: 4,386, `Cancelled`: 357, `Returned`: 257) |
-| **OrderDetails** | `OrderDetailID`| String (PK) | Unique line item identifier (`OD000001` - `OD012558`) |
-| | `OrderID` | String (FK) | Parent order identifier |
-| | `ProductID` | String (FK) | Product SKU identifier (`P0001` - `P0082`) |
-| | `Quantity` | Integer | Units ordered ($1$ to $4$) |
-| | `UnitPrice` | Integer | Product catalogue unit price in INR/USD |
-| | `DiscountPct` | Integer | Promotional discount percentage ($0, 5, 10, 15, 20, 25\%$) |
-| | `SalesAmount` | Float | Final realized sales: $\text{UnitPrice} \times \text{Quantity} \times (1 - \text{DiscountPct}/100)$ |
-| | `Profit` | Float | Realized gross profit: $\text{SalesAmount} - (\text{CostPrice} \times \text{Quantity})$ |
-| **Customers** | `CustomerID` | String (PK) | Customer identifier |
-| | `Gender`, `Age`, `City`, `Region`, `SignupDate` | Various | Customer demographic and cohort features |
-| **Products** | `ProductID` | String (PK) | Product SKU identifier |
-| | `ProductName`, `Category`, `CostPrice`, `SellingPrice` | Various | Catalogue metadata (Electronics, Fashion, Home, Beauty, Books) |
-| **Returns** | `ReturnID`, `OrderID`, `ReturnDate`, `ReturnReason` | Various | Return audit log (`Damaged`, `Wrong Product`, `Not Needed`, etc.) |
+![E-commerce Database Schema](reports/figures/E-commerce%20Database%20Schema%20Diagram.png)
+
+### 2.2 Relational Entities & Data Dictionary
+
+| Table | Column Name | Data Type | Constraints | Description & Business Semantics |
+| :--- | :--- | :--- | :---: | :--- |
+| **`Customers`** | `CustomerID` | `VARCHAR(10)` | 🔑 **PK** | Unique identifier for registered customers (`C0001` - `C1000`) |
+| | `CustomerName` | `VARCHAR(100)` | — | Customer full name |
+| | `Gender` | `VARCHAR(20)` | — | Customer demographic gender (`Male`, `Female`) |
+| | `Age` | `INT` | — | Customer age in years ($18$ to $60$) |
+| | `City` | `VARCHAR(50)` | — | Metro / tier-1 city of residence ($10$ unique cities) |
+| | `Region` | `VARCHAR(30)` | — | Geographic zone (`West`, `South`, `North`, `East`) |
+| | `SignupDate` | `DATE` | — | Customer account creation date (`2023-01-01` to `2025-12-31`) |
+| **`Orders`** | `OrderID` | `VARCHAR(10)` | 🔑 **PK** | Unique order header identifier (`O00001` - `O05000`) |
+| | `OrderDate` | `DATE` | — | Date transaction was finalized (`2024-01-01` to `2026-07-31`) |
+| | `CustomerID` | `VARCHAR(10)` | 🔗 **FK** | Foreign key linking to `Customers.CustomerID` |
+| | `PaymentMethod` | `VARCHAR(30)` | — | Payment channel (`UPI`, `Credit Card`, `Debit Card`, `COD`, `Net Banking`) |
+| | `OrderStatus` | `VARCHAR(20)` | — | Order state (`Delivered`: 4,386, `Cancelled`: 357, `Returned`: 257) |
+| **`Products`** | `ProductID` | `VARCHAR(10)` | 🔑 **PK** | Unique product SKU identifier (`P0001` - `P0082`) |
+| | `ProductName` | `VARCHAR(100)` | — | Commercial product title ($29$ distinct product models) |
+| | `Category` | `VARCHAR(50)` | — | Category (`Electronics`, `Home`, `Fashion`, `Beauty`, `Books`) |
+| | `CostPrice` | `DECIMAL(12,2)` | — | Baseline procurement/manufacturing cost |
+| | `SellingPrice` | `DECIMAL(12,2)` | — | Standard catalogue MSRP/selling price |
+| **`OrderDetails`** | `OrderDetailID` | `VARCHAR(12)` | 🔑 **PK** | Unique line item transaction identifier (`OD000001` - `OD012558`) |
+| | `OrderID` | `VARCHAR(10)` | 🔗 **FK** | Foreign key linking to parent `Orders.OrderID` |
+| | `ProductID` | `VARCHAR(10)` | 🔗 **FK** | Foreign key linking to `Products.ProductID` |
+| | `Quantity` | `INT` | — | Units purchased per line item ($1$ to $4$ units) |
+| | `UnitPrice` | `DECIMAL(12,2)` | — | Unit price applied to transaction line item |
+| | `DiscountPct` | `DECIMAL(5,2)` | — | Promotional discount percentage ($0\%, 5\%, 10\%, 15\%, 20\%, 25\%$) |
+| | `SalesAmount` | `DECIMAL(14,2)` | — | Realized line item revenue: $\text{UnitPrice} \times \text{Quantity} \times (1 - \frac{\text{DiscountPct}}{100})$ |
+| | `Profit` | `DECIMAL(14,2)` | — | Realized line item gross profit: $\text{SalesAmount} - (\text{CostPrice} \times \text{Quantity})$ |
+| **`Returns`** | `ReturnID` | `VARCHAR(10)` | 🔑 **PK** | Unique return event identifier (`R00001` - `R00257`) |
+| | `OrderID` | `VARCHAR(10)` | 🔗 **FK** | Foreign key linking to `Orders.OrderID` |
+| | `ReturnDate` | `DATE` | — | Recorded date of return |
+| | `ReturnReason` | `VARCHAR(50)` | — | Reason for return (`Damaged`, `Wrong Product`, `Not Needed`, etc.) |
+
+### 2.3 Cardinality & Relational Mappings ($1 \longrightarrow \infty$)
+- **`Customers` (1) $\xrightarrow{\quad\text{Places}\quad}$ `Orders` ($\infty$)**: A registered customer can place multiple orders over time.
+- **`Orders` (1) $\xrightarrow{\quad\text{Has}\quad}$ `OrderDetails` ($\infty$)**: Each order contains 1 to 4 individual line items, forming the shopping cart basket.
+- **`Products` (1) $\xrightarrow{\quad\text{Included In}\quad}$ `OrderDetails` ($\infty$)**: Each product SKU can appear across multiple order line items.
+- **`Orders` (1) $\xrightarrow{\quad\text{Can Have}\quad}$ `Returns` ($\infty$)**: Delivered orders can have associated return records in the case of product issues or customer returns.
 
 ---
 
@@ -232,9 +240,3 @@ jupyter notebook ecommerce_discount_impact_analysis.ipynb
 ```
 
 ---
-
-## 📝 10. Portfolio & Resume Summary
-
-**Bullet Point for Data Science Internship / Full-Time Resume:**
-> * Engineered an end-to-end e-commerce promotional discount impact framework across 5,000 orders and 12,500 line items; established statistically significant AOV expansion (+89.1%, Welch's $t=13.88, p < 10^{-29}$, Cohen's $d=0.74$) driven by cart accumulation (2.56 vs 1.20 items/basket).
-> * Uncovered critical gross margin compression from 38.7% to 19.4% and identified loss-making thresholds at $\ge 20\%$ discount depth; deployed a leakage-free Gradient Boosted profit forecasting pipeline ($R^2 = 0.918$, $\text{MAE} = \$1,993$) with time-based cross-validation.
