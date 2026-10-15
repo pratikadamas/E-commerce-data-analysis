@@ -17,10 +17,20 @@ E-commerce businesses frequently deploy promotional discounts to stimulate custo
 ### 1.2 Hypotheses Formulation
 We establish a two-sided independent two-sample test on the population mean AOV of delivered orders:
 
-$$\begin{cases}
-H_0: \mu_{\text{discount}} = \mu_{\text{no\_discount}} \quad \text{(Null Hypothesis: Mean AOV is identical)} \\
-H_1: \mu_{\text{discount}} \neq \mu_{\text{no\_discount}} \quad \text{(Alternative Hypothesis: Mean AOV differs)}
-\end{cases}$$
+<table>
+  <tr>
+    <th>Hypothesis</th>
+    <th>Statement</th>
+  </tr>
+  <tr>
+    <td><strong>H<sub>0</sub></strong></td>
+    <td>&mu;<sub>discount</sub> = &mu;<sub>no_discount</sub> (Null Hypothesis: Mean AOV is identical)</td>
+  </tr>
+  <tr>
+    <td><strong>H<sub>1</sub></strong></td>
+    <td>&mu;<sub>discount</sub> &ne; &mu;<sub>no_discount</sub> (Alternative Hypothesis: Mean AOV differs)</td>
+  </tr>
+</table>
 
 - **Significance Level ($\alpha$)**: $0.05$ (two-sided).
 - **Test Statistic**: Independent two-sample **Welch's $t$-test** (robust to heteroscedasticity).
@@ -213,5 +223,4 @@ pip install -r requirements.txt
 ```bash
 python -m unittest discover tests
 ```
-
 
