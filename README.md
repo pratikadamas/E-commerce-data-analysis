@@ -214,10 +214,4 @@ pip install -r requirements.txt
 python -m unittest discover tests
 ```
 
-### Running the Notebooks
-```bash
-# Launch Jupyter Notebook
-jupyter notebook notebooks/master_portfolio_analysis.ipynb
-```
 
----
