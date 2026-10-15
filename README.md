@@ -179,43 +179,40 @@ To empower real-time decision-making, we train machine learning models to predic
 
 ---
 
-## 📂 8. Project Structure
+## 📂 8. Modular Project Architecture
 
 ```text
 ecommerce-discount-analysis/
-├── ecommerce_discount_impact_analysis.ipynb # 🌟 Comprehensive Master Portfolio Notebook (All-in-One)
-│
-├── 01_Data_Cleaning_and_Validation.ipynb    # Phase 1: Data Ingestion, Referential Integrity & Order Aggregation
-├── 02_Exploratory_Data_Analysis.ipynb       # Phase 2: Distribution Modeling, Boxplots & Basket Decomposition
-├── 03_Hypothesis_Testing_and_Effect_Size.ipynb # Phase 3: Assumption Diagnostics, Welch's t-test, Cohen's d & CI
-├── 04_Machine_Learning_Profit_Prediction.ipynb # Phase 4: Leakage-Free Profit ML Pipeline & Time-Series CV
-├── 05_Automated_Unit_Tests.ipynb            # Phase 5: Interactive Notebook Unit Test Suite (All 5 Passed)
-│
-├── notebooks/                               # Mirrored modular notebooks
-│   ├── 01_Data_Cleaning_and_Validation.ipynb
-│   ├── 02_Exploratory_Data_Analysis.ipynb
-│   ├── 03_Hypothesis_Testing_and_Effect_Size.ipynb
-│   ├── 04_Machine_Learning_Profit_Prediction.ipynb
-│   └── 05_Automated_Unit_Tests.ipynb
-├── src/                                     # Reusable Python Source Modules
-│   ├── data_cleaning.py
-│   ├── exploratory_analysis.py
-│   ├── hypothesis_testing.py
-│   └── train_model.py
-├── reports/figures/                         # Generated High-Resolution Visual Figures (PNG)
-│   ├── 01_aov_distribution.png
-│   ├── 02_aov_boxplots.png
-│   ├── 03_basket_size_comparison.png
-│   ├── 04_margin_compression_tier.png
-│   └── 05_model_diagnostics.png
 ├── data/
-│   ├── raw/                                 # Raw CSV entities (Customers, Orders, OrderDetails, Products, Returns)
-│   └── processed/                           # Aggregated order-level analytical units
+│   ├── raw/                             # Original relational CSV entities (Customers, Orders, OrderDetails, Products, Returns)
+│   └── processed/                       # Cleaned order-level analytical units (AOV & Profit)
+├── notebooks/
+│   ├── 01_data_quality.ipynb            # Phase 1: Data ingestion, integrity audit & order aggregation
+│   ├── 02_eda.ipynb                     # Phase 2: AOV distributions, boxplots & basket size dynamics
+│   ├── 03_hypothesis_testing.ipynb      # Phase 3: Welch's t-test, Mann-Whitney U, Cohen's d & CI
+│   ├── 04_profit_prediction.ipynb       # Phase 4: Leakage-free ML profit forecasting pipeline
+│   ├── 05_automated_tests.ipynb         # Phase 5: Interactive test assertions & pipeline validation
+│   └── master_portfolio_analysis.ipynb  # 🌟 Unified Executive Master Portfolio Notebook
+├── src/
+│   ├── __init__.py                      # Python package initializer
+│   ├── data_cleaning.py                 # Data ingestion, schema audit & aggregation logic
+│   ├── exploratory_analysis.py          # Summary statistics & plotting routines
+│   ├── hypothesis_testing.py            # Statistical tests, assumption checks & effect sizes
+│   └── train_model.py                   # Time-series ML pipeline, cross-validation & diagnostics
+├── reports/
+│   └── figures/                         # Publication-quality charts & ER Schema diagram
+│       ├── E-commerce Database Schema Diagram.png
+│       ├── 01_aov_distribution.png
+│       ├── 02_aov_boxplots.png
+│       ├── 03_basket_size_comparison.png
+│       ├── 04_margin_compression_tier.png
+│       └── 05_model_diagnostics.png
 ├── tests/
-│   └── test_analysis.py                     # Python unittest suite
-├── requirements.txt                         # Package dependencies
-├── README.md                                # Comprehensive documentation
-└── .gitignore                               # Clean repository version control
+│   ├── __init__.py                      # Test package initializer
+│   └── test_analysis.py                 # Automated unit test suite (5 passing tests)
+├── requirements.txt                     # Package dependencies
+├── README.md                            # Comprehensive project documentation
+└── .gitignore                           # Clean repository version control
 ```
 
 ---
@@ -231,12 +228,13 @@ pip install -r requirements.txt
 
 ### Running the Test Suite
 ```bash
-python -m unittest tests/test_analysis.py
+python -m unittest discover tests
 ```
 
-### Running the Master Notebook
+### Running the Notebooks
 ```bash
-jupyter notebook ecommerce_discount_impact_analysis.ipynb
+# Launch Jupyter Notebook
+jupyter notebook notebooks/master_portfolio_analysis.ipynb
 ```
 
 ---
