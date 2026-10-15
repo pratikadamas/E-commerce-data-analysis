@@ -1,0 +1,83 @@
+ProductID,ProductName,Category,CostPrice,SellingPrice
+P0001,Wireless Headphones,Electronics,4840,8847
+P0002,Wireless Headphones,Electronics,4745,8892
+P0003,Wireless Headphones,Electronics,262,319
+P0004,Smart Watch,Electronics,2528,3517
+P0005,Smart Watch,Electronics,289,526
+P0006,Smart Watch,Electronics,3318,5410
+P0007,Bluetooth Speaker,Electronics,6193,9936
+P0008,Bluetooth Speaker,Electronics,6411,9277
+P0009,Bluetooth Speaker,Electronics,3254,4834
+P0010,Keyboard,Electronics,4101,6288
+P0011,Keyboard,Electronics,4971,7617
+P0012,Keyboard,Electronics,1623,2280
+P0013,Mouse,Electronics,601,1311
+P0014,Mouse,Electronics,5353,10018
+P0015,Mouse,Electronics,4460,6239
+P0016,Power Bank,Electronics,3624,7194
+P0017,Power Bank,Electronics,5005,10962
+P0018,Power Bank,Electronics,6061,8947
+P0019,Webcam,Electronics,2911,6155
+P0020,Webcam,Electronics,1565,1983
+P0021,Webcam,Electronics,5938,12927
+P0022,Mixer Grinder,Home,2519,5467
+P0023,Mixer Grinder,Home,5594,12189
+P0024,Mixer Grinder,Home,4926,9546
+P0025,Air Fryer,Home,3695,6585
+P0026,Air Fryer,Home,6214,9610
+P0027,Air Fryer,Home,3425,4363
+P0028,Table Lamp,Home,2584,3631
+P0029,Table Lamp,Home,6072,8916
+P0030,Table Lamp,Home,5905,10331
+P0031,Bedsheet,Home,6459,14006
+P0032,Bedsheet,Home,6208,11145
+P0033,Bedsheet,Home,4464,5694
+P0034,Storage Box,Home,6523,8273
+P0035,Storage Box,Home,2750,3553
+P0036,Storage Box,Home,4648,8476
+P0037,Wall Clock,Home,2564,4495
+P0038,Wall Clock,Home,2999,5709
+P0039,Wall Clock,Home,5403,7839
+P0040,T-Shirt,Fashion,3999,6601
+P0041,T-Shirt,Fashion,4805,8569
+P0042,T-Shirt,Fashion,5712,8402
+P0043,Jeans,Fashion,2705,3251
+P0044,Jeans,Fashion,1238,1630
+P0045,Jeans,Fashion,6254,8473
+P0046,Sneakers,Fashion,4907,10496
+P0047,Sneakers,Fashion,3114,4367
+P0048,Sneakers,Fashion,1963,3582
+P0049,Backpack,Fashion,2611,4908
+P0050,Backpack,Fashion,433,791
+P0051,Backpack,Fashion,4546,8105
+P0052,Jacket,Fashion,966,1682
+P0053,Jacket,Fashion,232,500
+P0054,Jacket,Fashion,3641,7011
+P0055,Watch,Fashion,2243,3114
+P0056,Watch,Fashion,6555,14270
+P0057,Watch,Fashion,2854,4846
+P0058,Face Wash,Beauty,1968,3214
+P0059,Face Wash,Beauty,3640,7607
+P0060,Face Wash,Beauty,1514,3201
+P0061,Shampoo,Beauty,4612,6727
+P0062,Shampoo,Beauty,3826,6552
+P0063,Shampoo,Beauty,3112,5568
+P0064,Moisturizer,Beauty,4006,6997
+P0065,Moisturizer,Beauty,1214,1750
+P0066,Moisturizer,Beauty,2409,3382
+P0067,Perfume,Beauty,2236,3128
+P0068,Perfume,Beauty,300,375
+P0069,Perfume,Beauty,5705,6924
+P0070,Hair Dryer,Beauty,5844,9093
+P0071,Hair Dryer,Beauty,5635,8287
+P0072,Hair Dryer,Beauty,5189,10954
+P0073,Python Book,Books,2400,3981
+P0074,Python Book,Books,3160,4472
+P0075,SQL Book,Books,1334,2498
+P0076,SQL Book,Books,4583,7205
+P0077,Excel Book,Books,1676,3416
+P0078,Excel Book,Books,1723,2727
+P0079,Power BI Book,Books,5433,11587
+P0080,Power BI Book,Books,6882,13672
+P0081,Statistics Book,Books,2584,4694
+P0082,Statistics Book,Books,1164,2255
